@@ -53,4 +53,9 @@ done
 
 stack setup
 stack build gtk2hs-buildtools
-stack exec -- stack build
+if [[ $OSTYPE == darwin* ]]; then
+    stack exec -- stack build --flag gtk:have-quartz-gtk
+else
+    stack exec -- stack build
+fi
+
