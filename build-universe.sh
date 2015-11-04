@@ -59,10 +59,12 @@ mkdir build-tmp
 cd build-tmp
 ln -s ../stack.yaml .
 
+## Check out everything
 for repo in "${REPOS[@]}"; do
   git clone https://github.com/diagrams/$repo
 done
 
+## Build diagrams
 stack setup
 stack build gtk2hs-buildtools
 if [[ $OSTYPE == darwin* ]]; then
@@ -71,3 +73,8 @@ else
     stack exec -- stack build
 fi
 
+## Build the website
+cd diagrams-doc
+stack runghc Shake.hs clean
+stack ghc -- --make Shake -threaded
+stack exec -- ./Shake +RTS -N7 -RTS build
