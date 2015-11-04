@@ -55,15 +55,15 @@ done
 
 ## Build diagrams
 stack setup
-stack build gtk2hs-buildtools
+stack build gtk2hs-buildtools || exit 1
 if [[ $OSTYPE == darwin* ]]; then
-    stack exec -- stack build --flag gtk:have-quartz-gtk
+    stack exec -- stack build --flag gtk:have-quartz-gtk || exit 1
 else
-    stack exec -- stack build
+    stack exec -- stack build || exit 1
 fi
 
 ## Build the website
 cd diagrams-doc
 stack runghc Shake.hs clean
-stack ghc -- --make Shake -threaded
-stack exec -- ./Shake +RTS -N7 -RTS build
+stack ghc -- --make Shake -threaded || exit 1
+stack exec -- ./Shake +RTS -N7 -RTS build || exit 1
