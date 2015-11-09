@@ -1,5 +1,5 @@
+#!/bin/bash
 UBUNTU_PKGS=(
-
   'pkg-config'
   'glib-2.0-dev'
   'libcairo2-dev'
