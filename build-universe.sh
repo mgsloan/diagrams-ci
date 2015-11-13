@@ -46,7 +46,7 @@ REPOS=(
 rm -rf build-tmp  # remove build-tmp in case it is still there from before
 mkdir build-tmp
 cd build-tmp
-ln -s ../stack.yaml .
+ln -s ../stack-HEAD.yaml stack.yaml
 
 ## Check out everything
 for repo in "${REPOS[@]}"; do
