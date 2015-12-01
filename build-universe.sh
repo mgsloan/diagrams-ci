@@ -62,6 +62,11 @@ else
     stack exec -- stack build || exit 1
 fi
 
+## Build diagrams-haddock diagrams
+for repo in "${REPOS[@]}"; do
+  cd $repo && stack exec -- diagrams-haddock -d `stack path --dist-dir` || exit 1
+done
+
 ## Build the website
 cd diagrams-doc
 stack runghc Shake.hs clean
